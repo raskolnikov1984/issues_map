@@ -66,29 +66,26 @@ Organización del código por dominios funcionales (features) en lugar de por ti
 ### 2.3. Estructura de Carpetas
 
 ```
-src/
-├── assets/                             # Estilos globales, imágenes, logos
-├── features/
-│   ├── auth/                           # Feature: Pantalla de Login y Autenticación
-│   │   ├── components/                 # LoginForm, ErrorMessage (validaciones)
-│   │   ├── hooks/                      # useAuthMutation (TanStack Query)
-│   │   └── services/                   # authApi.ts (llamados al endpoint de Login)
-│   │
-│   └── cases/                          # Feature: Panel de Casos y Mapa Interactivo
-│       ├── components/
-│       │   ├── CasesMap.tsx            # Componente del Mapa (React-Leaflet)
-│       │   ├── CaseDetailsPanel.tsx    # Panel de información detallada (Sección derecha)
-│       │   └── MapMarker.tsx           # Marcadores individuales en el mapa [8]
-│       ├── hooks/                      # useCasesQuery, useSelectCase
-│       ├── store/                      # useCasesStore.ts (Zustand: estado del caso seleccionado)
-│       └── services/                   # casesApi.ts (peticiones GET de casos)
-│
-├── shared/                             # Componentes transversales reutilizables
-│   ├── components/                     # Button, TextInput, MapContainer, LoadingSpinner
-│   └── layouts/                        # SplitViewLayout (Vista dividida de escritorio)
-│
-├── App.tsx                             # Configuración de rutas y proveedores globales
-└── main.tsx                            # Punto de entrada de React
+frontend/
+├── src/
+│   ├── assets/                   # Imágenes, logos
+│   ├── components/               # Componentes UI reutilizables (Botones, Inputs, Modales)
+│   │   ├── ui/
+│   │   └── common/
+│   ├── features/                 # Módulos de la aplicación
+│   │   ├── auth/
+│   │   │   ├── components/       # LoginForm.tsx
+│   │   │   └── hooks/            # useAuth.ts (manejo de estados de error/éxito)
+│   │   └── cases_map/
+│   │       ├── components/       # MapView.tsx (Leaflet), CasePanel.tsx, StatusStates.tsx
+│   │       └── services/         # Llamadas a la API del backend
+│   ├── layout/                   # Layout de vista dividida (Split Screen)
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css                 # Configuración de Tailwind con colores institucionales
+├── Dockerfile
+├── package.json
+└── vite.config.ts
 ```
 
 ---
@@ -97,5 +94,9 @@ src/
 
 * **Docker & Docker Compose:** Estandarización del entorno de desarrollo. Garantiza la paridad entre entornos (Desarrollo/Staging/Producción), encapsula dependencias del sistema operativo y simplifica la incorporación de nuevos desarrolladores al proyecto.
 
-#
+### 4. Seguridad:
+
++ Para el prototipo usar algoritmo `SHA-256` en el futuro, modificar a bcrypt para no agregar dependencias al inicio.
+
++ React-Router en el futuro.
 
