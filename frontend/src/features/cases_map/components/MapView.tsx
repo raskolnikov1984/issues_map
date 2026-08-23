@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import {
   AttributionControl,
   CircleMarker,
@@ -91,19 +91,32 @@ export function MapView({
         const active = item.id === selectedId;
 
         return (
-          <CircleMarker
-            key={item.id}
-            center={[item.latitude, item.longitude]}
-            radius={active ? 10 : 7}
-            bubblingMouseEvents={false}
-            pathOptions={{
-              color: active ? '#F5A623' : '#0B1F2D',
-              weight: active ? 3 : 2,
-              fillColor: active ? '#F5A623' : '#1EC8C8',
-              fillOpacity: 0.85,
-            }}
-            eventHandlers={{ click: () => onSelectCase(item.id) }}
-          />
+          <Fragment key={item.id}>
+            {active && (
+              <CircleMarker
+                center={[item.latitude, item.longitude]}
+                radius={16}
+                interactive={false}
+                pathOptions={{
+                  stroke: false,
+                  fillColor: '#FFFFFF',
+                  fillOpacity: 0.95,
+                }}
+              />
+            )}
+            <CircleMarker
+              center={[item.latitude, item.longitude]}
+              radius={active ? 12 : 7}
+              bubblingMouseEvents={false}
+              pathOptions={{
+                color: active ? '#DC2626' : '#0B1F2D',
+                weight: active ? 4 : 2,
+                fillColor: active ? '#EF4444' : '#1EC8C8',
+                fillOpacity: 0.9,
+              }}
+              eventHandlers={{ click: () => onSelectCase(item.id) }}
+            />
+          </Fragment>
         );
       })}
 
