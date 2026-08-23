@@ -7,6 +7,7 @@ describe('GetCasesUseCase', () => {
     const repository: ICaseRepository = {
       findAll,
       findById: jest.fn().mockResolvedValue(null),
+      save: jest.fn().mockResolvedValue(undefined),
     };
     const useCase = new GetCasesUseCase(repository);
 
@@ -20,6 +21,7 @@ describe('GetCasesUseCase', () => {
     const repository: ICaseRepository = {
       findAll,
       findById: jest.fn().mockResolvedValue(null),
+      save: jest.fn().mockResolvedValue(undefined),
     };
     const useCase = new GetCasesUseCase(repository);
 

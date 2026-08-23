@@ -15,4 +15,9 @@ export class InMemoryCaseRepository implements ICaseRepository {
   findById(id: string): Promise<Case | null> {
     return Promise.resolve(this.cases.find((item) => item.id === id) ?? null);
   }
+
+  save(entity: Case): Promise<void> {
+    this.cases.push(entity);
+    return Promise.resolve();
+  }
 }
