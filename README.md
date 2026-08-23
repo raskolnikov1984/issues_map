@@ -1,4 +1,4 @@
-# Issues Map
+# Cases Map
 
 ## Instancia de Desarrollo
 
