@@ -8,7 +8,9 @@
 docker compose -f compose.test.yaml up -d
 ```
 
-Levanta PostgreSQL y la API del backend en `localhost:3000` (repositorio `postgres`, migraciones automáticas y hot-reload de `backend/src`).
+Levanta PostgreSQL, la API del backend en `localhost:3000` (repositorio `postgres`, migraciones automáticas y hot-reload de `backend/src`) y el frontend en `localhost:5173` con hot-reload de `frontend/src`.
+
+El frontend consume la API mediante la variable `VITE_API_URL` (por defecto `http://localhost:3000`); los orígenes permitidos por CORS se configuran con `CORS_ORIGINS` en el backend.
 
 ### Eliminar Servicios
 

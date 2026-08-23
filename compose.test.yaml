@@ -30,5 +30,16 @@ services:
     volumes:
       - ./backend/src:/usr/src/app/src
 
+  frontend:
+    build: ./frontend
+    environment:
+      VITE_API_URL: http://localhost:3000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+
 volumes:
   pgdata:
