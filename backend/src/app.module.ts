@@ -1,9 +1,34 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { CaseSchema } from './cases/infrastructure/schemas/case.schema';
 import { CasesModule } from './cases/cases.module';
+import { databaseOptions } from './database/database.options';
+import { CreateCasesTable20260822000000 } from './database/migrations/20260822000000-create-cases-table.migration';
 import { SharedModule } from './shared/shared.module';
 
-@Module({
-  imports: [SharedModule, AuthModule, CasesModule],
-})
-export class AppModule {}
+@Module({})
+export class AppModule {
+  static register(): DynamicModule {
+    const postgres = process.env.REPOSITORY === 'postgres';
+
+    return {
+      module: AppModule,
+      imports: [
+        ...(postgres
+          ? [
+              TypeOrmModule.forRoot({
+                ...databaseOptions(),
+                entities: [CaseSchema],
+                migrations: [CreateCasesTable20260822000000],
+                migrationsRun: true,
+              }),
+            ]
+          : []),
+        SharedModule,
+        AuthModule,
+        CasesModule.register(postgres),
+      ],
+    };
+  }
+}
