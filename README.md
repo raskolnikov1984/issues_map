@@ -1,5 +1,13 @@
 # Cases Map
 
+![Login](docs/images/login.png)
+
+![Punto activo](docs/images/activePoint.png)
+
+![Puntos inactivos](docs/images/inactivePoints.png)
+
+![Punto seleccionado](docs/images/selectedPoint.png)
+
 ## Instancia de Desarrollo
 
 ### Construir Servicios
