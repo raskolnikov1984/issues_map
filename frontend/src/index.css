@@ -1,19 +1,54 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  /* Colores institucionales */
-  --color-primary: #0b1f2d;
-  --color-secondary: #1ec8c8;
-  --color-accent: #f5a623;
-  --color-surface: #1c5076;
+    /* Colores institucionales */
+    --color-primary: #0b1f2d;
+    --color-secondary: #1ec8c8;
+    --color-accent: #f5a623;
+    --color-surface: #1c5076;
+    --color-active-pin: #e62000;
+
+    --animate-pin-float: pin-float 3s ease-in-out infinite;
+
+    @keyframes pin-float {
+        0%,
+        100% {
+            translate: 0 0;
+        }
+        50% {
+            translate: 0 -6px;
+        }
+    }
 }
 
 @layer base {
-  body {
-    @apply bg-white font-sans text-neutral-800 antialiased;
-  }
+    body {
+        @apply bg-white font-sans text-neutral-800 antialiased;
+    }
 }
 
 .case-pin--active {
-  filter: drop-shadow(0 2px 5px rgb(220 38 38 / 0.55));
+    filter: drop-shadow(0 2px 5px rgb(220 38 38 / 0.55));
+}
+
+.brand-pin {
+    filter: drop-shadow(0 4px 12px rgb(30 200 200 / 0.45));
+}
+
+.map-pin-core {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: map-pin-pulse 2s ease-in-out infinite;
+}
+
+@keyframes map-pin-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.7);
+        opacity: 0.55;
+    }
 }

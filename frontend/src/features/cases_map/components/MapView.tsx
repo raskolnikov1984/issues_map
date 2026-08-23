@@ -11,6 +11,7 @@ import {
 import { divIcon } from "leaflet";
 import type { DivIcon } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { renderCasePinSvg } from "../../../components/common/mapPinSvg";
 import type { CaseSummary } from "../services/casesApi";
 
 export interface GeoPoint {
@@ -34,13 +35,7 @@ function pinIcon({ active }: { active: boolean }): DivIcon {
 
   return divIcon({
     className: active ? "case-pin case-pin--active" : "case-pin",
-    html: `<svg width="${width}" height="${height}" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">
-      <path d="M13 1C6.37 1 1 6.37 1 13c0 8.16 10.53 18.31 11.44 19.17a.8.8 0 0 0 1.12 0C14.47 31.31 25 21.16 25 13 25 6.37 19.63 1 13 1z"
-        fill="${active ? "#EF4444" : "#1EC8C8"}"
-        stroke="${active ? "#DC2626" : "#FFFFFF"}"
-        stroke-width="2" />
-      <circle cx="13" cy="13" r="4.5" fill="#FFFFFF" />
-    </svg>`,
+    html: renderCasePinSvg({ active, width, height }),
     iconSize: [width, height],
     iconAnchor: [width / 2, height],
   });

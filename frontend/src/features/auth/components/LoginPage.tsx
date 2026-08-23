@@ -1,5 +1,6 @@
 import type { AuthResponse } from "../services/authApi";
 import { useAuth } from "../hooks/useAuth";
+import { MapPin } from "../../../components/common/MapPin";
 import { LoginForm } from "./LoginForm";
 
 interface LoginPageProps {
@@ -31,6 +32,9 @@ export function LoginPage({ onAuthenticated }: LoginPageProps) {
 
       <section className="relative w-full max-w-sm rounded-2xl border border-white/15 bg-primary/60 p-8 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl">
         <header className="mb-6 flex flex-col items-center gap-2 text-center">
+          <div className="group mb-1 flex cursor-default justify-center">
+            <MapPin className="brand-pin h-14 w-auto animate-pin-float transition-transform duration-300 ease-out group-hover:-translate-y-1.5 group-hover:scale-110" />
+          </div>
           <h1 className="text-2xl font-semibold tracking-tight text-white">
             Cases Map
           </h1>
