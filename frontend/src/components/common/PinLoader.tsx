@@ -1,12 +1,21 @@
 import { cn } from "../ui/cn";
 import { MapPin } from "./MapPin";
 
+type PinLoaderVariant = "bounce" | "pulse";
+
 interface PinLoaderProps {
   label?: string;
   overlay?: boolean;
+  variant?: PinLoaderVariant;
+  pinColor?: string;
 }
 
-export function PinLoader({ label = "Cargando…", overlay = false }: PinLoaderProps) {
+export function PinLoader({
+  label = "Cargando…",
+  overlay = false,
+  variant = "bounce",
+  pinColor = "var(--color-secondary)",
+}: PinLoaderProps) {
   return (
     <div
       role="status"
@@ -19,13 +28,20 @@ export function PinLoader({ label = "Cargando…", overlay = false }: PinLoaderP
     >
       <div className="flex flex-col items-center gap-3">
         <div className="relative flex h-16 w-16 items-end justify-center">
-          <span
-            aria-hidden="true"
-            className="loader-ring absolute bottom-0 left-1/2 h-2.5 w-12 -translate-x-1/2 rounded-full bg-secondary/40"
-          />
+          {variant === "bounce" && (
+            <span
+              aria-hidden="true"
+              className="loader-ring absolute bottom-0 left-1/2 h-2.5 w-12 -translate-x-1/2 rounded-full bg-secondary/40"
+            />
+          )}
           <MapPin
-            color="var(--color-secondary)"
-            className="relative z-10 h-12 w-auto animate-pin-bounce"
+            color={pinColor}
+            className={cn(
+              "relative z-10 h-12 w-auto",
+              variant === "bounce"
+                ? "animate-pin-bounce"
+                : "pin-loader-pulse animate-pin-pulse",
+            )}
           />
         </div>
         <p
