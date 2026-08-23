@@ -26,7 +26,7 @@ interface MapViewProps {
   onPickLocation: (point: GeoPoint) => void;
 }
 
-const MADRID_CENTER: [number, number] = [6.2442018, -75.6224112];
+const MEDELLIN_CENTER: [number, number] = [6.2442018, -75.6224112];
 
 function pinIcon({ active }: { active: boolean }): DivIcon {
   const width = active ? 64 : 52;
@@ -86,7 +86,7 @@ export function MapView({
 
   return (
     <MapContainer
-      center={MADRID_CENTER}
+      center={MEDELLIN_CENTER}
       zoom={12}
       scrollWheelZoom
       className="h-full w-full"
