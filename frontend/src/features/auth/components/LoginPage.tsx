@@ -46,7 +46,7 @@ export function LoginPage({ onAuthenticated }: LoginPageProps) {
         <LoginForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
 
         <p className="mt-6 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-center text-xs text-white/50">
-          Demo · admin@issuesmap.com / admin123
+          Demo · admin@casesmap.com / admin123
         </p>
       </section>
     </main>

@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react';
-import type { AuthResponse } from '../services/authApi';
+import { useCallback, useState } from "react";
+import type { AuthResponse } from "../services/authApi";
 
-const STORAGE_KEY = 'issues_map.user';
+const STORAGE_KEY = "cases_map.user";
 
 function readStoredUser(): AuthResponse | null {
   try {
