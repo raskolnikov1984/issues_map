@@ -17,7 +17,7 @@ function ToastItem({ toast, onDismiss }: ToastItemProps) {
     <div
       role={toast.variant === "error" ? "alert" : "status"}
       className={cn(
-        "animate-fade-in pointer-events-auto flex w-72 items-start justify-between gap-3 rounded-lg px-4 py-3 shadow-lg ring-1",
+        "animate-toast-in pointer-events-auto flex w-full items-start justify-between gap-3 rounded-lg px-4 py-3 shadow-lg ring-1",
         toast.variant === "success"
           ? "bg-emerald-600 text-white ring-emerald-500/40"
           : "bg-red-600 text-white ring-red-500/40",
@@ -66,7 +66,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
       {children}
       <div
         aria-live="polite"
-        className="pointer-events-none fixed right-4 bottom-4 z-50 flex flex-col gap-2"
+        className="pointer-events-none fixed left-1/2 top-4 z-[60] flex w-full max-w-sm -translate-x-1/2 flex-col items-center gap-2 px-4"
       >
         {toasts.map((toast) => (
           <ToastItem key={toast.id} toast={toast} onDismiss={dismissToast} />

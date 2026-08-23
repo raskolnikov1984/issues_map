@@ -12,6 +12,7 @@
     --animate-pin-bounce: pin-bounce 1.1s ease-in-out infinite;
     --animate-pin-pulse: pin-pulse 1.15s ease-in-out infinite;
     --animate-fade-in: fade-in 0.35s ease-out both;
+    --animate-toast-in: toast-in 0.3s ease-out both;
 
     @keyframes pin-float {
         0%,
@@ -47,6 +48,17 @@
         from {
             opacity: 0;
             transform: translateY(8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes toast-in {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
         }
         to {
             opacity: 1;
