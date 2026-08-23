@@ -29,7 +29,7 @@ export function LoginPage({ onAuthenticated }: LoginPageProps) {
         className="absolute -bottom-32 left-1/4 h-80 w-80 rounded-full bg-accent/15 blur-3xl"
       />
 
-      <section className="relative w-full max-w-sm rounded-2xl border border-white/15 bg-surface/60 p-8 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl">
+      <section className="relative w-full max-w-sm rounded-2xl border border-white/15 bg-primary/60 p-8 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl">
         <header className="mb-6 flex flex-col items-center gap-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight text-white">
             Issues Map
