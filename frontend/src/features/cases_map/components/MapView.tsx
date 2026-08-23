@@ -135,7 +135,7 @@ export function MapView({
       </MapContainer>
 
       {draftLocation && (
-        <div className="absolute top-3 right-3 z-[1000] w-56 rounded-xl border border-accent/50 bg-white/95 p-3 shadow-lg backdrop-blur">
+        <div className="absolute top-3 right-3 z-[1000] w-80 rounded-xl border border-accent/50 bg-white/95 p-3 shadow-lg backdrop-blur">
           <p className="text-xs font-medium text-neutral-700">
             Ubicación seleccionada: {draftLocation.latitude.toFixed(5)},{' '}
             {draftLocation.longitude.toFixed(5)}
