@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { CreateCaseUseCase } from './application/use-cases/create-case.use-case';
 import { GetCaseDetailsUseCase } from './application/use-cases/get-case-details.use-case';
 import { GetCasesUseCase } from './application/use-cases/get-cases.use-case';
 import { CASE_REPOSITORY } from './domain/ports/case.repository.port';
@@ -10,6 +11,7 @@ import { CasesController } from './infrastructure/controllers/cases.controller';
   providers: [
     GetCasesUseCase,
     GetCaseDetailsUseCase,
+    CreateCaseUseCase,
     { provide: CASE_REPOSITORY, useClass: InMemoryCaseRepository },
   ],
 })
