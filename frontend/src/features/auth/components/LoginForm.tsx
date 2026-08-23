@@ -6,6 +6,9 @@ import { Input } from '../../../components/ui/Input';
 
 const EMAIL_PATTERN = /^\S+@\S+\.\S+$/;
 
+const inputClasses =
+  'border-white/20 bg-white/10 text-white placeholder:text-white/40';
+
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;
   isLoading: boolean;
@@ -44,7 +47,7 @@ export function LoginForm({ onSubmit, isLoading, error }: LoginFormProps) {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
-        <label htmlFor="email" className="text-sm font-medium text-neutral-700">
+        <label htmlFor="email" className="text-sm font-medium text-white/80">
           Correo electrónico
         </label>
         <Input
@@ -55,12 +58,16 @@ export function LoginForm({ onSubmit, isLoading, error }: LoginFormProps) {
           value={email}
           aria-invalid={Boolean(fieldErrors.email)}
           onChange={(event) => setEmail(event.target.value)}
+          className={inputClasses}
         />
-        <ErrorMessage message={fieldErrors.email} />
+        <ErrorMessage message={fieldErrors.email} tone="light" />
       </div>
 
       <div className="flex flex-col gap-1">
-        <label htmlFor="password" className="text-sm font-medium text-neutral-700">
+        <label
+          htmlFor="password"
+          className="text-sm font-medium text-white/80"
+        >
           Contraseña
         </label>
         <Input
@@ -71,11 +78,12 @@ export function LoginForm({ onSubmit, isLoading, error }: LoginFormProps) {
           value={password}
           aria-invalid={Boolean(fieldErrors.password)}
           onChange={(event) => setPassword(event.target.value)}
+          className={inputClasses}
         />
-        <ErrorMessage message={fieldErrors.password} />
+        <ErrorMessage message={fieldErrors.password} tone="light" />
       </div>
 
-      <ErrorMessage message={error} />
+      <ErrorMessage message={error} tone="light" />
 
       <Button type="submit" disabled={isLoading}>
         {isLoading ? 'Iniciando sesión…' : 'Iniciar sesión'}

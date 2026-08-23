@@ -5,6 +5,7 @@
   --color-primary: #0b1f2d;
   --color-secondary: #1ec8c8;
   --color-accent: #f5a623;
+  --color-surface: #1c5076;
 }
 
 @layer base {
