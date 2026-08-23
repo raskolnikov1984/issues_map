@@ -1,0 +1,45 @@
+#+title: Requests
+
+* Requests
+Ejemplo de request contra la api usando [[https://github.com/federicotdn/verb][verb]]
+
+** Issues Map API :verb:
+template http://localhost:3000
+content-type: application/json;
+
+*** Health
+# 200 → { "status": "ok" }
+get /health
+
+*** Cases
+# 200 → lista de casos (puede ser [])
+get /cases
+
+*** Case per page
+get /cases?page=1&limit=10
+
+*** Specific Case
+# 200 → { "id", "title", "description", "latitude", "longitude", "createdAt" }
+# 404 si el id no existe
+get /cases/1
+
+*** Create Case
+# 201 → caso creado (id UUID generado por la api)
+# 400 si latitude/longitude están fuera de rango
+post /cases
+
+{
+  "title": "Flood report",
+  "description": "Blocked street downtown",
+  "latitude": 6.2442,
+  "longitude": -75.5812
+}
+
+*** Login
+# 201 → { "id", "email" } | 401 credenciales inválidas
+post /auth/login
+
+{
+  "email": "",
+  "password": ""
+}
