@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import {
   AttributionControl,
   CircleMarker,
@@ -7,11 +7,11 @@ import {
   TileLayer,
   useMap,
   useMapEvents,
-} from 'react-leaflet';
-import { divIcon } from 'leaflet';
-import type { DivIcon } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import type { CaseSummary } from '../services/casesApi';
+} from "react-leaflet";
+import { divIcon } from "leaflet";
+import type { DivIcon } from "leaflet";
+import "leaflet/dist/leaflet.css";
+import type { CaseSummary } from "../services/casesApi";
 
 export interface GeoPoint {
   latitude: number;
@@ -29,15 +29,15 @@ interface MapViewProps {
 const MADRID_CENTER: [number, number] = [40.4168, -3.7038];
 
 function pinIcon({ active }: { active: boolean }): DivIcon {
-  const width = active ? 32 : 26;
-  const height = active ? 42 : 34;
+  const width = active ? 64 : 52;
+  const height = active ? 84 : 68;
 
   return divIcon({
-    className: active ? 'case-pin case-pin--active' : 'case-pin',
+    className: active ? "case-pin case-pin--active" : "case-pin",
     html: `<svg width="${width}" height="${height}" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">
       <path d="M13 1C6.37 1 1 6.37 1 13c0 8.16 10.53 18.31 11.44 19.17a.8.8 0 0 0 1.12 0C14.47 31.31 25 21.16 25 13 25 6.37 19.63 1 13 1z"
-        fill="${active ? '#EF4444' : '#1EC8C8'}"
-        stroke="${active ? '#DC2626' : '#FFFFFF'}"
+        fill="${active ? "#EF4444" : "#1EC8C8"}"
+        stroke="${active ? "#DC2626" : "#FFFFFF"}"
         stroke-width="2" />
       <circle cx="13" cy="13" r="4.5" fill="#FFFFFF" />
     </svg>`,
@@ -48,7 +48,7 @@ function pinIcon({ active }: { active: boolean }): DivIcon {
 
 function MapClickWatcher({
   onPickLocation,
-}: Pick<MapViewProps, 'onPickLocation'>) {
+}: Pick<MapViewProps, "onPickLocation">) {
   useMapEvents({
     click(event) {
       onPickLocation({
@@ -128,10 +128,10 @@ export function MapView({
           center={[draftLocation.latitude, draftLocation.longitude]}
           radius={8}
           pathOptions={{
-            color: '#F5A623',
+            color: "#F5A623",
             weight: 2,
-            dashArray: '4 3',
-            fillColor: '#FFFFFF',
+            dashArray: "4 3",
+            fillColor: "#FFFFFF",
             fillOpacity: 0.4,
           }}
         />
