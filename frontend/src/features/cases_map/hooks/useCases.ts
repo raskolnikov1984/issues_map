@@ -6,6 +6,7 @@ interface UseCasesResult {
   cases: CaseSummary[];
   isLoading: boolean;
   error: string | null;
+  loadedCount: number;
   reload: () => void;
 }
 
@@ -13,6 +14,7 @@ export function useCases(): UseCasesResult {
   const [cases, setCases] = useState<CaseSummary[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [loadedCount, setLoadedCount] = useState(0);
   const [reloadToken, setReloadToken] = useState(0);
 
   useEffect(() => {
@@ -24,7 +26,10 @@ export function useCases(): UseCasesResult {
 
       try {
         const result = await fetchCases();
-        if (!cancelled) setCases(result);
+        if (!cancelled) {
+          setCases(result);
+          setLoadedCount((count) => count + 1);
+        }
       } catch (err) {
         if (!cancelled) {
           setError(err instanceof Error ? err.message : 'Error inesperado');
@@ -43,5 +48,5 @@ export function useCases(): UseCasesResult {
 
   const reload = useCallback(() => setReloadToken((token) => token + 1), []);
 
-  return { cases, isLoading, error, reload };
+  return { cases, isLoading, error, loadedCount, reload };
 }

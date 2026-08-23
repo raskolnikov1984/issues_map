@@ -1,6 +1,7 @@
 import type { AuthResponse } from "../services/authApi";
 import { useAuth } from "../hooks/useAuth";
 import { MapPin } from "../../../components/common/MapPin";
+import { PinLoader } from "../../../components/common/PinLoader";
 import { LoginForm } from "./LoginForm";
 
 interface LoginPageProps {
@@ -57,6 +58,8 @@ export function LoginPage({ onAuthenticated }: LoginPageProps) {
           Demo · admin@casesmap.com / admin123
         </p>
       </section>
+
+      {isLoading && <PinLoader overlay label="Iniciando sesión…" />}
     </main>
   );
 }

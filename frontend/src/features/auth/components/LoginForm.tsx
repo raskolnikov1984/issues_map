@@ -7,7 +7,7 @@ import { Input } from '../../../components/ui/Input';
 const EMAIL_PATTERN = /^\S+@\S+\.\S+$/;
 
 const inputClasses =
-  'border-white/20 bg-white/10 text-white placeholder:text-white/40';
+  'border-white/20 bg-white/10 text-white placeholder:text-white/40 disabled:bg-white/5 disabled:text-white/40';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;
@@ -56,6 +56,7 @@ export function LoginForm({ onSubmit, isLoading, error }: LoginFormProps) {
           autoComplete="email"
           placeholder="tu@correo.com"
           value={email}
+          disabled={isLoading}
           aria-invalid={Boolean(fieldErrors.email)}
           onChange={(event) => setEmail(event.target.value)}
           className={inputClasses}
@@ -76,6 +77,7 @@ export function LoginForm({ onSubmit, isLoading, error }: LoginFormProps) {
           autoComplete="current-password"
           placeholder="••••••••"
           value={password}
+          disabled={isLoading}
           aria-invalid={Boolean(fieldErrors.password)}
           onChange={(event) => setPassword(event.target.value)}
           className={inputClasses}
@@ -85,7 +87,7 @@ export function LoginForm({ onSubmit, isLoading, error }: LoginFormProps) {
 
       <ErrorMessage message={error} tone="light" />
 
-      <Button type="submit" disabled={isLoading}>
+      <Button type="submit" loading={isLoading}>
         {isLoading ? 'Iniciando sesión…' : 'Iniciar sesión'}
       </Button>
     </form>

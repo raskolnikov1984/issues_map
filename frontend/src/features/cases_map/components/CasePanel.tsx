@@ -1,4 +1,5 @@
 import { cn } from '../../../components/ui/cn';
+import { EmptyState } from '../../../components/common/EmptyState';
 import type { CaseSummary } from '../services/casesApi';
 
 const dateFormatter = new Intl.DateTimeFormat('es-ES', {
@@ -15,9 +16,10 @@ interface CasePanelProps {
 export function CasePanel({ cases, selectedId, onSelect }: CasePanelProps) {
   if (cases.length === 0) {
     return (
-      <p className="rounded-xl border border-dashed border-neutral-300 p-8 text-center text-sm text-neutral-400">
-        No hay casos registrados todavía.
-      </p>
+      <EmptyState
+        title="No hay casos registrados"
+        message="Cuando se creen casos aparecerán aquí y en el mapa."
+      />
     );
   }
 

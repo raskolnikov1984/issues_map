@@ -1,5 +1,8 @@
-import { useState } from 'react';
-import { ErrorMessage } from '../../../components/common/ErrorMessage';
+import { useEffect, useRef, useState } from 'react';
+import { ErrorState } from '../../../components/common/ErrorState';
+import { PinLoader } from '../../../components/common/PinLoader';
+import { SuccessMessage } from '../../../components/common/SuccessMessage';
+import { useToast } from '../../../components/common/toast/ToastContext';
 import { Button } from '../../../components/ui/Button';
 import { MapSplitLayout } from '../../../layout/MapSplitLayout';
 import { useCases } from '../hooks/useCases';
@@ -14,9 +17,19 @@ interface DashboardPageProps {
 }
 
 export function DashboardPage({ userEmail, onSignOut }: DashboardPageProps) {
-  const { cases, isLoading, error, reload } = useCases();
+  const { cases, isLoading, error, reload, loadedCount } = useCases();
+  const { showToast } = useToast();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [draftLocation, setDraftLocation] = useState<GeoPoint | null>(null);
+  const [welcomeVisible, setWelcomeVisible] = useState(true);
+  const notifiedLoadsRef = useRef(0);
+
+  useEffect(() => {
+    if (loadedCount <= notifiedLoadsRef.current) return;
+
+    notifiedLoadsRef.current = loadedCount;
+    if (loadedCount > 1) showToast('Casos actualizados');
+  }, [loadedCount, showToast]);
 
   const selectedCase = cases.find((item) => item.id === selectedId) ?? null;
 
@@ -51,19 +64,27 @@ export function DashboardPage({ userEmail, onSignOut }: DashboardPageProps) {
             {isLoading ? 'Cargando…' : `${cases.length} registrados`}
           </p>
         </div>
-        <Button variant="secondary" onClick={reload} disabled={isLoading} className="px-3 py-1.5 text-xs">
+        <Button
+          variant="secondary"
+          onClick={reload}
+          loading={isLoading}
+          className="px-3 py-1.5 text-xs"
+        >
           Actualizar
         </Button>
       </header>
 
-      {error && <ErrorMessage message={error} />}
+      {welcomeVisible && !error && (
+        <SuccessMessage
+          message={`Sesión iniciada como ${userEmail}`}
+          onDismiss={() => setWelcomeVisible(false)}
+        />
+      )}
 
-      {isLoading ? (
-        <div className="flex flex-col gap-3">
-          {[0, 1, 2].map((row) => (
-            <div key={row} className="h-24 animate-pulse rounded-xl bg-neutral-100" />
-          ))}
-        </div>
+      {error ? (
+        <ErrorState message={error} onRetry={reload} />
+      ) : isLoading ? (
+        <PinLoader label="Cargando casos…" />
       ) : (
         <CasePanel cases={cases} onSelect={selectCase} />
       )}
@@ -87,6 +108,16 @@ export function DashboardPage({ userEmail, onSignOut }: DashboardPageProps) {
   );
 
   return (
-    <MapSplitLayout userEmail={userEmail} onSignOut={onSignOut} map={map} panel={panel} />
+    <>
+      <MapSplitLayout
+        userEmail={userEmail}
+        onSignOut={onSignOut}
+        map={map}
+        panel={panel}
+      />
+      {isLoading && loadedCount === 0 && (
+        <PinLoader overlay label="Cargando casos…" />
+      )}
+    </>
   );
 }
