@@ -87,7 +87,7 @@ export function MapView({
   return (
     <MapContainer
       center={MEDELLIN_CENTER}
-      zoom={12}
+      zoom={13}
       scrollWheelZoom
       className="h-full w-full"
       attributionControl={false}
