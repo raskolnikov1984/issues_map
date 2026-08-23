@@ -1,12 +1,10 @@
 # Cases Map
 
-![Login](docs/images/login.png)
-
-![Punto activo](docs/images/activePoint.png)
-
-![Puntos inactivos](docs/images/inactivePoints.png)
-
-![Punto seleccionado](docs/images/selectedPoint.png)
+| <img src="docs/images/login.png" width="320"/> | <img src="docs/images/activePoint.png" width="320"/> |
+|:---:|:---:|
+| Login | Punto activo |
+| <img src="docs/images/inactivePoints.png" width="320"/> | <img src="docs/images/selectedPoint.png" width="320"/> |
+| Puntos inactivos | Punto seleccionado |
 
 ## Instancia de Desarrollo
 
