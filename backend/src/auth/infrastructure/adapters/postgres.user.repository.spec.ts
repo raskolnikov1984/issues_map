@@ -7,7 +7,7 @@ describe('PostgresUserRepository', () => {
   const makeSchema = (): UserSchema => {
     const schema = new UserSchema();
     schema.id = 'user-id';
-    schema.email = 'admin@issuesmap.com';
+    schema.email = 'admin@casesmap.com';
     schema.passwordHash = 'a-hash';
     return schema;
   };
@@ -26,15 +26,15 @@ describe('PostgresUserRepository', () => {
     const { repository, orm } = buildRepository();
     orm.findOneBy.mockResolvedValue(makeSchema());
 
-    const result = await repository.findByEmail('admin@issuesmap.com');
+    const result = await repository.findByEmail('admin@casesmap.com');
 
     expect(orm.findOneBy).toHaveBeenCalledWith({
-      email: 'admin@issuesmap.com',
+      email: 'admin@casesmap.com',
     });
     expect(result).toBeInstanceOf(User);
     expect(result).toMatchObject({
       id: 'user-id',
-      email: 'admin@issuesmap.com',
+      email: 'admin@casesmap.com',
       passwordHash: 'a-hash',
     });
   });
@@ -43,7 +43,7 @@ describe('PostgresUserRepository', () => {
     const { repository, orm } = buildRepository();
     orm.findOneBy.mockResolvedValue(null);
 
-    const result = await repository.findByEmail('unknown@issuesmap.com');
+    const result = await repository.findByEmail('unknown@casesmap.com');
 
     expect(result).toBeNull();
   });

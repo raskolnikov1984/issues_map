@@ -40,7 +40,7 @@ describe('LoginUseCase', () => {
     const { useCase } = buildUseCase();
 
     const result = await useCase.execute(
-      'unknown@issuesmap.com',
+      'unknown@casesmap.com',
       DEMO_USER_PASSWORD,
     );
 

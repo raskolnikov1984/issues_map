@@ -50,7 +50,7 @@ const runDbTests = process.env.RUN_DB_TESTS === 'true';
     });
 
     it('returns null for an unknown email', async () => {
-      const user = await repository.findByEmail('ghost@issuesmap.com');
+      const user = await repository.findByEmail('ghost@casesmap.com');
 
       expect(user).toBeNull();
     });
