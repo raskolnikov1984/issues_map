@@ -1,12 +1,15 @@
-import { Fragment, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   AttributionControl,
   CircleMarker,
   MapContainer,
+  Marker,
   TileLayer,
   useMap,
   useMapEvents,
 } from 'react-leaflet';
+import { divIcon } from 'leaflet';
+import type { DivIcon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { CaseSummary } from '../services/casesApi';
 
@@ -24,6 +27,24 @@ interface MapViewProps {
 }
 
 const MADRID_CENTER: [number, number] = [40.4168, -3.7038];
+
+function pinIcon({ active }: { active: boolean }): DivIcon {
+  const width = active ? 32 : 26;
+  const height = active ? 42 : 34;
+
+  return divIcon({
+    className: active ? 'case-pin case-pin--active' : 'case-pin',
+    html: `<svg width="${width}" height="${height}" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 1C6.37 1 1 6.37 1 13c0 8.16 10.53 18.31 11.44 19.17a.8.8 0 0 0 1.12 0C14.47 31.31 25 21.16 25 13 25 6.37 19.63 1 13 1z"
+        fill="${active ? '#EF4444' : '#1EC8C8'}"
+        stroke="${active ? '#DC2626' : '#FFFFFF'}"
+        stroke-width="2" />
+      <circle cx="13" cy="13" r="4.5" fill="#FFFFFF" />
+    </svg>`,
+    iconSize: [width, height],
+    iconAnchor: [width / 2, height],
+  });
+}
 
 function MapClickWatcher({
   onPickLocation,
@@ -91,32 +112,14 @@ export function MapView({
         const active = item.id === selectedId;
 
         return (
-          <Fragment key={item.id}>
-            {active && (
-              <CircleMarker
-                center={[item.latitude, item.longitude]}
-                radius={16}
-                interactive={false}
-                pathOptions={{
-                  stroke: false,
-                  fillColor: '#FFFFFF',
-                  fillOpacity: 0.95,
-                }}
-              />
-            )}
-            <CircleMarker
-              center={[item.latitude, item.longitude]}
-              radius={active ? 12 : 7}
-              bubblingMouseEvents={false}
-              pathOptions={{
-                color: active ? '#DC2626' : '#0B1F2D',
-                weight: active ? 4 : 2,
-                fillColor: active ? '#EF4444' : '#1EC8C8',
-                fillOpacity: 0.9,
-              }}
-              eventHandlers={{ click: () => onSelectCase(item.id) }}
-            />
-          </Fragment>
+          <Marker
+            key={item.id}
+            position={[item.latitude, item.longitude]}
+            icon={pinIcon({ active })}
+            bubblingMouseEvents={false}
+            zIndexOffset={active ? 1000 : 0}
+            eventHandlers={{ click: () => onSelectCase(item.id) }}
+          />
         );
       })}
 

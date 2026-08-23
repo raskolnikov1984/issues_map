@@ -13,3 +13,7 @@
     @apply bg-white font-sans text-neutral-800 antialiased;
   }
 }
+
+.case-pin--active {
+  filter: drop-shadow(0 2px 5px rgb(220 38 38 / 0.55));
+}
