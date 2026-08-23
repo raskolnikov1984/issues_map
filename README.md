@@ -8,6 +8,8 @@
 docker compose -f compose.test.yaml up -d
 ```
 
+Levanta PostgreSQL y la API del backend en `localhost:3000` (repositorio `postgres`, migraciones automáticas y hot-reload de `backend/src`).
+
 ### Eliminar Servicios
 
 ```bash
