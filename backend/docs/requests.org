@@ -11,6 +11,16 @@ content-type: application/json;
 # 200 → { "status": "ok" }
 get /health
 
+*** Login
+post /auth/login
+
+#+begin_src json
+{
+"email": "admin@issuesmap.com",
+"password": "admin123"
+}
+#+end_src
+
 *** Cases
 # 200 → lista de casos (puede ser [])
 get /cases
