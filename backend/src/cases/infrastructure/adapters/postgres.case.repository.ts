@@ -1,3 +1,4 @@
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Case } from '../../domain/entities/case.entity';
 import { ICaseRepository } from '../../domain/ports/case.repository.port';
@@ -5,7 +6,10 @@ import { Coordinate } from '../../domain/value-objects/coordinate.vo';
 import { CaseSchema } from '../schemas/case.schema';
 
 export class PostgresCaseRepository implements ICaseRepository {
-  constructor(private readonly repository: Repository<CaseSchema>) {}
+  constructor(
+    @InjectRepository(CaseSchema)
+    private readonly repository: Repository<CaseSchema>,
+  ) {}
 
   async findAll(skip = 0, take?: number): Promise<Case[]> {
     const schemas = await this.repository.find({ skip, take });
