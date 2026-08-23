@@ -1,10 +1,12 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { UserSchema } from './auth/infrastructure/schemas/user.schema';
 import { CaseSchema } from './cases/infrastructure/schemas/case.schema';
 import { CasesModule } from './cases/cases.module';
 import { databaseOptions } from './database/database.options';
 import { CreateCasesTable20260822000000 } from './database/migrations/20260822000000-create-cases-table.migration';
+import { CreateUsersTable20260822000100 } from './database/migrations/20260822000100-create-users-table.migration';
 import { SharedModule } from './shared/shared.module';
 
 @Module({})
@@ -19,14 +21,17 @@ export class AppModule {
           ? [
               TypeOrmModule.forRoot({
                 ...databaseOptions(),
-                entities: [CaseSchema],
-                migrations: [CreateCasesTable20260822000000],
+                entities: [CaseSchema, UserSchema],
+                migrations: [
+                  CreateCasesTable20260822000000,
+                  CreateUsersTable20260822000100,
+                ],
                 migrationsRun: true,
               }),
             ]
           : []),
         SharedModule,
-        AuthModule,
+        AuthModule.register(postgres),
         CasesModule.register(postgres),
       ],
     };
