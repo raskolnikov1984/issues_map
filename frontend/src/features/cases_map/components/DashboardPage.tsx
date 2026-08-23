@@ -88,22 +88,6 @@ export function DashboardPage({ userEmail, onSignOut }: DashboardPageProps) {
       ) : (
         <CasePanel cases={cases} onSelect={selectCase} />
       )}
-
-      {draftLocation && (
-        <footer className="sticky bottom-0 mt-auto rounded-xl border border-accent/40 bg-accent/10 p-3">
-          <p className="text-xs font-medium text-neutral-700">
-            Ubicación seleccionada: {draftLocation.latitude.toFixed(5)},{' '}
-            {draftLocation.longitude.toFixed(5)}
-          </p>
-          <button
-            type="button"
-            disabled
-            className="mt-2 w-full cursor-not-allowed rounded-md bg-primary/20 px-3 py-1.5 text-xs font-medium text-primary/60"
-          >
-            Crear caso aquí (próximamente)
-          </button>
-        </footer>
-      )}
     </div>
   );
 
