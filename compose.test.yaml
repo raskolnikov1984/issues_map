@@ -21,6 +21,7 @@ services:
     environment:
       REPOSITORY: postgres
       POSTGRES_HOST: db
+      CORS_ORIGINS: http://localhost:5173,http://localhost:3000
     ports:
       - "3000:3000"
     depends_on:

@@ -33,6 +33,14 @@ REPOSITORY=postgres npm run start:dev
 
 La conexión se configura con las variables `POSTGRES_HOST`, `POSTGRES_PORT`, `POSTGRES_USER`, `POSTGRES_PASSWORD` y `POSTGRES_DB` (ver `backend/.env.example`; los valores por defecto coinciden con `compose.test.yaml`).
 
+### CORS
+
+Los orígenes permitidos se configuran con `CORS_ORIGINS` (separados por coma; el comodín `*` permite todos). Por defecto se permiten `http://localhost:5173` y `http://localhost:3000`:
+
+```bash
+CORS_ORIGINS="https://app.example.com" npm run start:dev
+```
+
 ### Migraciones
 
 ```bash
