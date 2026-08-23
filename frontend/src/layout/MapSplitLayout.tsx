@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { Button } from '../components/ui/Button';
+import type { ReactNode } from "react";
+import { Button } from "../components/ui/Button";
 
 interface MapSplitLayoutProps {
   userEmail: string;
@@ -17,7 +17,7 @@ export function MapSplitLayout({
   return (
     <div className="flex h-screen flex-col">
       <header className="flex items-center justify-between bg-primary px-6 py-3 text-white">
-        <span className="text-lg font-semibold tracking-tight">Issues Map</span>
+        <span className="text-lg font-semibold tracking-tight">Cases Map</span>
         <div className="flex items-center gap-3">
           <span className="hidden text-sm text-white/70 sm:inline">
             {userEmail}

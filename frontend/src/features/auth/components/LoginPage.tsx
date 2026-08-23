@@ -1,6 +1,6 @@
-import type { AuthResponse } from '../services/authApi';
-import { useAuth } from '../hooks/useAuth';
-import { LoginForm } from './LoginForm';
+import type { AuthResponse } from "../services/authApi";
+import { useAuth } from "../hooks/useAuth";
+import { LoginForm } from "./LoginForm";
 
 interface LoginPageProps {
   onAuthenticated: (user: AuthResponse) => void;
@@ -32,7 +32,7 @@ export function LoginPage({ onAuthenticated }: LoginPageProps) {
       <section className="relative w-full max-w-sm rounded-2xl border border-white/15 bg-primary/60 p-8 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl">
         <header className="mb-6 flex flex-col items-center gap-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight text-white">
-            Issues Map
+            Cases Map
           </h1>
           <span
             className="h-0.5 w-10 rounded-full bg-accent"
@@ -43,7 +43,11 @@ export function LoginPage({ onAuthenticated }: LoginPageProps) {
           </p>
         </header>
 
-        <LoginForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
+        <LoginForm
+          onSubmit={handleSubmit}
+          isLoading={isLoading}
+          error={error}
+        />
 
         <p className="mt-6 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-center text-xs text-white/50">
           Demo · admin@casesmap.com / admin123
